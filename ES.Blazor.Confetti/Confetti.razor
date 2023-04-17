@@ -1,0 +1,21 @@
+﻿@using System.Security.Cryptography;
+
+@if (Visible)
+{
+    <div class="confetti">
+        @for (int h = 0; h < 3; h++)
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                int max = i * 4;
+                int left = RandomNumberGenerator.GetInt32(max - 4, max);
+                int width = RandomNumberGenerator.GetInt32(5, 7);
+                int height = RandomNumberGenerator.GetInt32(10, 17);
+                int rotate = RandomNumberGenerator.GetInt32(-62, 71);
+                int delay = RandomNumberGenerator.GetInt32(10, 453) + 500 * h;
+                int duration = RandomNumberGenerator.GetInt32(980, 2187);
+                <div style="--left:@(left)%; --width: @(width)px; --height: @(height)px; --rotate:@(rotate)deg; --delay: @(delay)ms; --duration: @(duration)ms;" class="confetti-piece"></div>
+            }
+        }
+    </div>
+}
