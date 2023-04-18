@@ -7,9 +7,22 @@ public partial class Confetti
     [Parameter]
     public bool Visible { get; set; }
 
+    public string ConfettiHideCss { get; set; } = "";
+
+    enum ConfettiColor
+    {
+        Red,
+        Orange,
+        LightGreen,
+        Purple,
+        Lightskyblue,
+        Mediumvioletred
+    }
+
     public async Task ShowAsync(double duration = 0)
     {
         Visible = true;
+        
         await InvokeAsync(StateHasChanged);
 
         if (duration > 0)
@@ -18,6 +31,17 @@ public partial class Confetti
 
             while (await timer.WaitForNextTickAsync())
             {
+                ConfettiHideCss = "confetti-hide";
+                timer.Dispose();
+            }
+
+            await InvokeAsync(StateHasChanged);
+
+            timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+
+            while (await timer.WaitForNextTickAsync())
+            {
+                ConfettiHideCss = "";
                 Visible = false;
                 timer.Dispose();
             }
