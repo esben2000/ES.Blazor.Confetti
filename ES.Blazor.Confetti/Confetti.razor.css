@@ -1,4 +1,4 @@
-﻿div.confetti {
+div.confetti {
     position: fixed;
     left: 0;
     right: 0;
@@ -9,7 +9,9 @@
 }
 
 div.confetti-hide {
-    opacity:0;
+    animation: confettiHide 1s 1 linear;
+    animation-delay: var(--delay);
+    animation-fill-mode: forwards;
 }
 
 .confetti-piece {
@@ -21,7 +23,7 @@ div.confetti-hide {
     left: var(--left);
     transform: rotate(var(--rotate));
     opacity: 0;
-    animation: makeItRain 1000ms infinite ease-out;
+    animation: confettiRain 1000ms infinite ease-out;
     animation-delay: var(--delay);
     animation-duration: var(--duration);
 }
@@ -30,16 +32,23 @@ div.confetti-hide {
         z-index: 1;
     }
 
-@keyframes makeItRain {
+@keyframes confettiRain {
     from {
         opacity: 0;
     }
-
     50% {
         opacity: 1;
     }
-
     to {
         transform: translateY(400px);
+    }
+}
+
+@keyframes confettiHide {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
